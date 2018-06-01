@@ -7,6 +7,7 @@ using UnityEngine;
 public class LMDashboard : MonoBehaviour {
 
     public GameObject screen;
+    public TextMesh screenText;
     public GameObject icons;
     public float iconsOffset = 1;
     private bool iconsInView = false;
@@ -42,6 +43,7 @@ public class LMDashboard : MonoBehaviour {
         this.MenuOpenCloseControl(1);
         MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
         mr.material.color = Color.cyan;
+        this.screenText.text = "Menu " + this.activeMenu;
     }
 
     public void IconButton2Pressed()
@@ -49,6 +51,7 @@ public class LMDashboard : MonoBehaviour {
         this.MenuOpenCloseControl(2);
         MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
         mr.material.color = Color.green;
+        this.screenText.text = "Menu " + this.activeMenu;
     }
 
     public void IconButton3Pressed()
@@ -56,6 +59,7 @@ public class LMDashboard : MonoBehaviour {
         this.MenuOpenCloseControl(3);
         MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
         mr.material.color = Color.red;
+        this.screenText.text = "Menu " + this.activeMenu;
     }
 
     private void MenuOpenCloseControl(int menuNum)
