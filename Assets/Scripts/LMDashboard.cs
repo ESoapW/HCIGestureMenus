@@ -40,16 +40,22 @@ public class LMDashboard : MonoBehaviour {
     public void IconButton1Pressed()
     {
         this.MenuOpenCloseControl(1);
+        MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
+        mr.material.color = Color.cyan;
     }
 
     public void IconButton2Pressed()
     {
         this.MenuOpenCloseControl(2);
+        MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
+        mr.material.color = Color.green;
     }
 
     public void IconButton3Pressed()
     {
         this.MenuOpenCloseControl(3);
+        MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
+        mr.material.color = Color.red;
     }
 
     private void MenuOpenCloseControl(int menuNum)
