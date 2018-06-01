@@ -6,7 +6,13 @@ using UnityEngine;
 
 public class LMDashboard : MonoBehaviour {
 
-    Controller c;
+    public GameObject screen;
+    public GameObject icons;
+    public float iconsOffset = 1;
+    private bool iconsInView = false;
+    private Vector3 iconsOriginalPosition;
+    private Controller c;
+    private int activeMenu = 0; // 0 = no menu, 1 = menu 1, 2 = menu 2, 3 = menu 3
 
 	// Use this for initialization
 	void Start () {
@@ -14,11 +20,49 @@ public class LMDashboard : MonoBehaviour {
         c.Connect += this.OnServiceConnect;
         c.Device += this.OnConnect;
         c.FrameReady += this.OnFrame;
+        this.iconsOriginalPosition = icons.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (this.iconsInView)
+        {
+            Vector3 offset = new Vector3(this.iconsOffset,0,0);
+            this.icons.transform.position = Vector3.Lerp(this.icons.transform.position, this.iconsOriginalPosition + offset, 0.3f);
+        }
+        else
+        {
+            Vector3 offset = new Vector3(0, 0, 0);
+            this.icons.transform.position = Vector3.Lerp(this.icons.transform.position, this.iconsOriginalPosition + offset, 0.3f);
+        }
 	}
+
+    public void IconButton1Pressed()
+    {
+        this.MenuOpenCloseControl(1);
+    }
+
+    public void IconButton2Pressed()
+    {
+        this.MenuOpenCloseControl(2);
+    }
+
+    public void IconButton3Pressed()
+    {
+        this.MenuOpenCloseControl(3);
+    }
+
+    private void MenuOpenCloseControl(int menuNum)
+    {
+        if (this.activeMenu == menuNum)
+        {
+            this.activeMenu = 0;
+            this.screen.SetActive(false);
+            return;
+        }
+        this.activeMenu = menuNum;
+        this.screen.SetActive(true);
+    }
 
     public void OnServiceConnect(object sender, ConnectionEventArgs args)
     {
@@ -32,6 +76,18 @@ public class LMDashboard : MonoBehaviour {
 
     public void OnFrame(object sender, FrameEventArgs args)
     {
+        if (this.IsSwiping(false, false, args.frame) || this.IsSwiping(true, false, args.frame))
+        {
+            this.iconsInView = true;
+        }
+
+        if (this.IsSwiping(false, true, args.frame) || this.IsSwiping(true, true, args.frame))
+        {
+            this.iconsInView = false;
+        }
+
+        // Example Codes:
+        /*
         // right hand
         if (this.IsSwiping(false, true, args.frame))
         {
@@ -50,7 +106,7 @@ public class LMDashboard : MonoBehaviour {
         else if (this.IsSwiping(true, false, args.frame))
         {
             print("left hand swipe right");
-        }
+        }*/
     }
 
     private bool IsSwiping(bool handIsLeft, bool directionIsLeft, Frame frame)
