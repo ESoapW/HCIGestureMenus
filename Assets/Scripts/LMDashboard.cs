@@ -41,7 +41,7 @@ public class LMDashboard : MonoBehaviour {
     public void IconButton1Pressed()
     {
         this.MenuOpenCloseControl(1);
-        MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
+        MeshRenderer mr = this.screen.GetComponentInChildren<MeshRenderer>();
         mr.material.color = Color.cyan;
         this.screenText.text = "Menu " + this.activeMenu;
     }
@@ -49,7 +49,7 @@ public class LMDashboard : MonoBehaviour {
     public void IconButton2Pressed()
     {
         this.MenuOpenCloseControl(2);
-        MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
+        MeshRenderer mr = this.screen.GetComponentInChildren<MeshRenderer>();
         mr.material.color = Color.green;
         this.screenText.text = "Menu " + this.activeMenu;
     }
@@ -57,7 +57,7 @@ public class LMDashboard : MonoBehaviour {
     public void IconButton3Pressed()
     {
         this.MenuOpenCloseControl(3);
-        MeshRenderer mr = this.screen.GetComponent<MeshRenderer>();
+        MeshRenderer mr = this.screen.GetComponentInChildren<MeshRenderer>();
         mr.material.color = Color.red;
         this.screenText.text = "Menu " + this.activeMenu;
     }
