@@ -14,6 +14,8 @@ public class LMDashboard : MonoBehaviour {
     private Vector3 iconsOriginalPosition;
     private Controller c;
     private int activeMenu = 0; // 0 = no menu, 1 = menu 1, 2 = menu 2, 3 = menu 3
+    private double verticalAxis = 0.5f;
+    private double horizontalAxis = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -94,6 +96,7 @@ public class LMDashboard : MonoBehaviour {
         if (this.IsSwiping(false, true, args.frame) || this.IsSwiping(true, true, args.frame))
         {
             this.iconsInView = false;
+            this.screen.SetActive(false);
         }
 
         // Example Codes:
